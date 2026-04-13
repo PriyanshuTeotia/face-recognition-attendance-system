@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Face Recognition</title>
+
+    <style>
+        body {
+
+            margin: 0;
+            font-family: Arial, sans-serif;
+            /* background-image: url("static/images/BG-img-faceRecProject.jpg"); */
+
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url("{{ url_for('static', filename='images/BG-img-faceRecProject.jpg') }}");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            color: white;
+        }
+
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-top: 60px;
+            padding: 20px;
+        }
+
+        /* LEFT SIDE WRAPPER */
+        .left-wrapper {
+            width: 40%;
+        }
+
+        /* 🔥 TITLE ABOVE BOX */
+        .header {
+            text-align: center;
+            margin-bottom: 116px;
+        }
+
+        .header h1 {
+            font-size: 31px;
+            /* margin: 0; */
+            margin-bottom: 25px;
+        }
+
+        .header p {
+            font-size: 17px;
+            color: #ccc;
+            margin: 5px 0 0;
+        }
+
+        /* LEFT PANEL BOX */
+        .left-panel {
+            padding: 37px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        #result {
+            font-size: 23px;
+            color: #66ef16;
+            margin-top: 20px;
+        }
+
+        /* RIGHT SIDE */
+        .right-panel {
+            width: 41%;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 30px;
+            border: 2px solid #00ffcc;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .start {
+            background-color: #00ffcc;
+        }
+
+        .stop {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-wrapper,
+            .right-panel {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <!-- LEFT SIDE -->
+        <div class="left-wrapper">
+
+            <!-- 🔥 TITLE OUTSIDE BOX -->
+            <div class="header">
+                <h1>🤖 Face Recognition System 🚀</h1>
+                <h3>Real-Time AI Powered Attendance System ⚡</h3>
+            </div>
+
+            <!-- BOX -->
+            <div class="left-panel">
+                <h2>🔍 Recognition Started</h2>
+                <div id="result">🎯 Searching for Student...</div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right-panel">
+
+            <img src="/video">
+
+            <div class="buttons">
+                <button class="start" onclick="startCamera()">Start Camera</button>
+                <button onclick="getResult()">Get Result</button>
+                <button class="stop" onclick="stopCamera()">Stop Camera</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function getResult() {
+            fetch('/result')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("result").innerText =
+                        "👤 Student Identified: " + data.name + " (" + data.conf + "%)";
+                });
+        }
+    </script>
+
+</body>
+
+</html>
