@@ -12,10 +12,10 @@ This project is a Face Recognition based Attendance System built using Python, O
 ## 📸 Screenshots
 
 ### UI
-![UI](interface-images/ui.png)
+![UI](Interface-images/ui.png)
 
 ### Recognition
-![Recognition](interface-images/recognition.png)
+![Recognition](Interface-images/recognition.png)
 
 ## 🛠️ Tech Stack
 - Python
